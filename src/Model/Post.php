@@ -1,7 +1,9 @@
 <?php
 namespace App\Model;
 
-use App\Service\Config;
+use PDO;
+
+use App\Model\DB;
 
 class Post
 {
@@ -70,7 +72,7 @@ class Post
 
     public static function findAll(): array
     {
-        $pdo = new \PDO(Config::get('db_dsn'), Config::get('db_user'), Config::get('db_pass'));
+        $pdo = DB::getConnection();
         $sql = 'SELECT * FROM post';
         $statement = $pdo->prepare($sql);
         $statement->execute();
@@ -86,7 +88,7 @@ class Post
 
     public static function find($id): ?Post
     {
-        $pdo = new \PDO(Config::get('db_dsn'), Config::get('db_user'), Config::get('db_pass'));
+        $pdo = DB::getConnection();
         $sql = 'SELECT * FROM post WHERE id = :id';
         $statement = $pdo->prepare($sql);
         $statement->execute(['id' => $id]);
@@ -102,7 +104,7 @@ class Post
 
     public function save(): void
     {
-        $pdo = new \PDO(Config::get('db_dsn'), Config::get('db_user'), Config::get('db_pass'));
+        $pdo = DB::getConnection();
         if (! $this->getId()) {
             $sql = "INSERT INTO post (subject, content) VALUES (:subject, :content)";
             $statement = $pdo->prepare($sql);
@@ -125,7 +127,7 @@ class Post
 
     public function delete(): void
     {
-        $pdo = new \PDO(Config::get('db_dsn'), Config::get('db_user'), Config::get('db_pass'));
+        $pdo = DB::getConnection();
         $sql = "DELETE FROM post WHERE id = :id";
         $statement = $pdo->prepare($sql);
         $statement->execute([

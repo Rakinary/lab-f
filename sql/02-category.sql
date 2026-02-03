@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS category
+(
+    id INTEGER NOT NULL
+    CONSTRAINT category_pk
+    PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);

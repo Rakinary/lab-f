@@ -38,6 +38,25 @@ switch ($action) {
         $controller = new \App\Controller\PostController();
         $view = $controller->deleteAction($_REQUEST['id'], $router);
         break;
+    case 'category-index':
+        $controller = new \App\Controller\CategoryController();
+        $view = $controller->indexAction($templating, $router);
+        break;
+
+    case 'category-create':
+        $controller = new \App\Controller\CategoryController();
+        $view = $controller->createAction($templating, $router, $_POST['category'] ?? null);
+        break;
+
+    case 'category-edit':
+        $controller = new \App\Controller\CategoryController();
+        $view = $controller->editAction($templating, $router, (int)($_REQUEST['id'] ?? 0), $_POST['category'] ?? null);
+        break;
+
+    case 'category-delete':
+        $controller = new \App\Controller\CategoryController();
+        $view = $controller->deleteAction($router, (int)($_REQUEST['id'] ?? 0));
+        break;
     case 'info':
         $controller = new \App\Controller\InfoController();
         $view = $controller->infoAction();

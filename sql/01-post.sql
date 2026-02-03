@@ -1,4 +1,4 @@
-create table post
+create table if not exists post
 (
     id      integer not null
         constraint post_pk
