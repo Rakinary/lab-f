@@ -84,6 +84,7 @@ class PostController
             throw new NotFoundException("Missing post with id $postId");
         }
 
+
         $post->delete();
         $path = $router->generatePath('post-index');
         $router->redirect($path);
